@@ -1,0 +1,189 @@
+nvm install 18
+nvm use 18
+v18.20.8 is already installed.
+Now using node v18.20.8 (npm v10.8.2)
+Now using node v18.20.8 (npm v10.8.2)
+rahul@rahul-VivoBook:~$ mongosh
+Current Mongosh Log ID: 67eaed7dcb023c00796b140a
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+Using MongoDB:          7.0.18
+Using Mongosh:          2.4.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-04-01T00:17:34.999+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-04-01T00:17:35.614+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2025-04-01T00:17:35.614+05:30: vm.max_map_count is too low
+------
+
+test> use Order_DB
+... 
+switched to db Order_DB
+Order_DB> use Order_DB
+... 
+already on db Order_DB
+Order_DB> db.createCollection("orders")
+... 
+{ ok: 1 }
+Order_DB> db.orders.insertMany([
+...   {
+...     order_id: 1,
+...     customer_name: "Amit Sharma",
+...     items: ["Laptop", "Mouse"],
+...     total_amount: 50000,
+...     order_status: "pending"
+...   },
+...   {
+...     order_id: 2,
+...     customer_name: "Neha Verma",
+...     items: ["Phone", "Earphones"],
+...     total_amount: 15000,
+...     order_status: "shipped"
+...   },
+...   {
+...     order_id: 3,
+...     customer_name: "Rajesh Kumar",
+...     items: ["TV", "Remote"],
+...     total_amount: 40000,
+...     order_status: "delivered"
+...   },
+...   {
+...     order_id: 4,
+...     customer_name: "Priya Singh",
+...     items: ["Tablet", "Charger"],
+...     total_amount: 12000,
+...     order_status: "pending"
+...   },
+...   {
+...     order_id: 5,
+...     customer_name: "Manoj Tiwari",
+...     items: ["Washing Machine"],
+...     total_amount: 25000,
+...     order_status: "shipped"
+...   }
+... ])
+... 
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67eaedd8cb023c00796b140b'),
+    '1': ObjectId('67eaedd8cb023c00796b140c'),
+    '2': ObjectId('67eaedd8cb023c00796b140d'),
+    '3': ObjectId('67eaedd8cb023c00796b140e'),
+    '4': ObjectId('67eaedd8cb023c00796b140f')
+  }
+}
+Order_DB> db.orders.find().pretty()
+... 
+[
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140b'),
+    order_id: 1,
+    customer_name: 'Amit Sharma',
+    items: [ 'Laptop', 'Mouse' ],
+    total_amount: 50000,
+    order_status: 'pending'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140c'),
+    order_id: 2,
+    customer_name: 'Neha Verma',
+    items: [ 'Phone', 'Earphones' ],
+    total_amount: 15000,
+    order_status: 'shipped'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140d'),
+    order_id: 3,
+    customer_name: 'Rajesh Kumar',
+    items: [ 'TV', 'Remote' ],
+    total_amount: 40000,
+    order_status: 'delivered'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140e'),
+    order_id: 4,
+    customer_name: 'Priya Singh',
+    items: [ 'Tablet', 'Charger' ],
+    total_amount: 12000,
+    order_status: 'pending'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140f'),
+    order_id: 5,
+    customer_name: 'Manoj Tiwari',
+    items: [ 'Washing Machine' ],
+    total_amount: 25000,
+    order_status: 'shipped'
+  }
+]
+Order_DB> db.orders.find({ order_status: "pending" }).pretty()
+... 
+[
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140b'),
+    order_id: 1,
+    customer_name: 'Amit Sharma',
+    items: [ 'Laptop', 'Mouse' ],
+    total_amount: 50000,
+    order_status: 'pending'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140e'),
+    order_id: 4,
+    customer_name: 'Priya Singh',
+    items: [ 'Tablet', 'Charger' ],
+    total_amount: 12000,
+    order_status: 'pending'
+  }
+]
+Order_DB> db.orders.find({ total_amount: { $gt: 1000 } }).pretty()
+... 
+[
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140b'),
+    order_id: 1,
+    customer_name: 'Amit Sharma',
+    items: [ 'Laptop', 'Mouse' ],
+    total_amount: 50000,
+    order_status: 'pending'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140c'),
+    order_id: 2,
+    customer_name: 'Neha Verma',
+    items: [ 'Phone', 'Earphones' ],
+    total_amount: 15000,
+    order_status: 'shipped'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140d'),
+    order_id: 3,
+    customer_name: 'Rajesh Kumar',
+    items: [ 'TV', 'Remote' ],
+    total_amount: 40000,
+    order_status: 'delivered'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140e'),
+    order_id: 4,
+    customer_name: 'Priya Singh',
+    items: [ 'Tablet', 'Charger' ],
+    total_amount: 12000,
+    order_status: 'pending'
+  },
+  {
+    _id: ObjectId('67eaedd8cb023c00796b140f'),
+    order_id: 5,
+    customer_name: 'Manoj Tiwari',
+    items: [ 'Washing Machine' ],
+    total_amount: 25000,
+    order_status: 'shipped'
+  }
+]
+Order_DB> db.orders.find().pretty()
+... db.orders.find({ order_status: "pending" }).pretty()
+... db.orders.find({ total_amount: { $gt: 1000 } }).pretty()
+... 
