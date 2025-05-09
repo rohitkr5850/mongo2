@@ -149,7 +149,7 @@ Order_DB> db.orders.find({ total_amount: { $gt: 1000 } }).pretty()
     items: [ 'Laptop', 'Mouse' ],
     total_amount: 50000,
     order_status: 'pending'
-  },
+       },
   {
     _id: ObjectId('67eaedd8cb023c00796b140c'),
     order_id: 2,
